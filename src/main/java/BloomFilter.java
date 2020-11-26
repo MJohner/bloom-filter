@@ -31,8 +31,6 @@ public class BloomFilter {
             bitVec[hashValue] = true;
             nrOfElements++;
         }
-        System.out.println();
-
     }
 
     public void add(String[] arr){
@@ -53,7 +51,7 @@ public class BloomFilter {
 
     public void printSpecs(){
         System.out.println("Expected number of elements: " + elements_n);
-        System.out.println("Declared error tolerance: " + errorProb_p);
+        System.out.println("Declared false positive tolerance: " + errorProb_p);
         System.out.println("Number of bits in filter vector: " + filterSize_m);
         System.out.println("Number of hash functions: " + hashFunctions_k);
         System.out.println("Number of elements in filter: " + nrOfElements);

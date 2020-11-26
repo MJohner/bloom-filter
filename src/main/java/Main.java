@@ -12,7 +12,7 @@ public class Main {
     }
 
     public static void doTheTest() throws FileNotFoundException{
-        BloomFilter b = new BloomFilter(60000, 0.5);
+        BloomFilter b = new BloomFilter(60000, 0.01);
         File wordsInFilter = new File("src/main/resources/englishOnlyWords.txt");
         Scanner s = new Scanner(wordsInFilter);
         while(s.hasNextLine()){
@@ -32,6 +32,7 @@ public class Main {
             total++;
         }
         b.printSpecs();
+        System.out.println();
         System.out.println("Total checked words: " + total);
         System.out.println("Total false positive: " + contains);
         System.out.println("False positive rate: " + (contains / total) );
