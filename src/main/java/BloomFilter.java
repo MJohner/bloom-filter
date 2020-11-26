@@ -1,4 +1,6 @@
-import java.util.Arrays;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
+import java.nio.charset.Charset;
 
 public class BloomFilter {
 
@@ -7,6 +9,7 @@ public class BloomFilter {
     private int filterSize_m;
     private int hashFunctions_k;
     private boolean[] bitVec;
+    private HashFunction[] hf;
 
     public BloomFilter(int n, double p){
         this.elements_n = n;
@@ -15,9 +18,19 @@ public class BloomFilter {
         filterSize_m =  (int) (-1 * Math.round((n * Math.log(p)) / (Math.pow(Math.log(2), 2))));
         hashFunctions_k = (int) Math.round(filterSize_m / n * Math.log(2));
         bitVec = new boolean[filterSize_m];
+        hf = new HashFunction[hashFunctions_k];
+        for(int i = 0; i < hashFunctions_k; i++){
+            hf[i] = Hashing.murmur3_128(i);
+        }
     }
 
     public void add(String s){
+        for(int i = 0; i < hashFunctions_k; i++){
+            int hashValue = Math.abs(hf[i].hashString(s, Charset.forName("UTF-8")).asInt())%filterSize_m;
+            System.out.println(hashValue);
+            bitVec[hashValue] = true;
+        }
+        System.out.println();
 
     }
 
@@ -27,9 +40,14 @@ public class BloomFilter {
         }
     }
 
-    public double contains(String s){
-
-        return 0.0;
+    public boolean contains(String s){
+        for(int i = 0; i < hashFunctions_k; i++){
+            int hashValue = Math.abs(hf[i].hashString(s, Charset.forName("UTF-8")).asInt())%filterSize_m;
+            if(!bitVec[hashValue]){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void printSpecs(){
@@ -37,6 +55,5 @@ public class BloomFilter {
         System.out.println("Declared error tolerance: " + errorProb_p);
         System.out.println("Number of bits in filter vector: " + filterSize_m);
         System.out.println("Number of hash functions: " + hashFunctions_k);
-        System.out.println("Filter vector: " + Arrays.toString(bitVec));
     }
 }
