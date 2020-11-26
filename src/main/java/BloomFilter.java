@@ -10,6 +10,7 @@ public class BloomFilter {
     private int hashFunctions_k;
     private boolean[] bitVec;
     private HashFunction[] hf;
+    private int nrOfElements;
 
     public BloomFilter(int n, double p){
         this.elements_n = n;
@@ -27,8 +28,8 @@ public class BloomFilter {
     public void add(String s){
         for(int i = 0; i < hashFunctions_k; i++){
             int hashValue = Math.abs(hf[i].hashString(s, Charset.forName("UTF-8")).asInt())%filterSize_m;
-            System.out.println(hashValue);
             bitVec[hashValue] = true;
+            nrOfElements++;
         }
         System.out.println();
 
@@ -55,5 +56,6 @@ public class BloomFilter {
         System.out.println("Declared error tolerance: " + errorProb_p);
         System.out.println("Number of bits in filter vector: " + filterSize_m);
         System.out.println("Number of hash functions: " + hashFunctions_k);
+        System.out.println("Number of elements in filter: " + nrOfElements);
     }
 }
