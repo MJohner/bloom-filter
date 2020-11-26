@@ -1,0 +1,2 @@
+http://matthias.vallentin.net/blog/2011/06/a-garden-variety-of-bloom-filters/
+https://github.com/google/guava/wiki/HashingExplained
