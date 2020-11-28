@@ -29,8 +29,8 @@ public class BloomFilter {
         for(int i = 0; i < hashFunctions_k; i++){
             int hashValue = Math.abs(hf[i].hashString(s, Charset.forName("UTF-8")).asInt())%filterSize_m;
             bitVec[hashValue] = true;
-            nrOfElements++;
         }
+        nrOfElements++;
     }
 
     public void add(String[] arr){
