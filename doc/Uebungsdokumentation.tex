@@ -55,7 +55,8 @@ dass die Aussage ob ein Wert enthalten ist nur mit einer gewissen Wahrscheinlich
 Die Werte, welche ein Bloom-Filter "enthält", sind nicht als vollwertige Daten gespeichert.
 Sie werden mittels mehrerer Anwendungen von Hash-Funktionen auf einem linearen Bit-Vektor abgelegt.
 Dadurch können Daten, welche im Bloom-Filter abgelegt wurden,
-mit dem Bloom-Filter nicht mehr rekonstruiert werden,
+nicht mehr aus dem Bloom-Filter rekonstruiert werden.
+\\
 \\
 Werden als Beispiel die Werte \{{\it A, B, C}\} im Bloom-Filter abgelegt,
 kann der Filter mit Sicherheit sagen ob {\it A}, {\it B}, oder {\it C} im Filter enthalten ist.
@@ -98,7 +99,7 @@ Damit nicht jeder Chrome Client bei jedem URL-Aufruf,
 bei Google anfragen muss, ob die URL "sauber" ist und
 nicht jeder Client die gesamte URL-Liste bei sich führen muss,
 wird mit dem Chrome ein Bloom-Filter mitgeliefert.
-Dieser Filter enthält alle Schädlichen URLs.
+Dieser Filter enthält alle schädlichen URLs.
 So kann der Client vor jedem URL-Aufruf prüfen,
 ob die URL potentiell schädlich ist.
 Sollte der Filter die URL als schädlich markieren,
